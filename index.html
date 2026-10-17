@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>서울비전치과 | 편안한 치과 진료</title>
+  <style>
+    :root {
+      --ink: #1f2a2e;
+      --muted: #5b6b70;
+      --surface: #fbf9f6;
+      --card: #ffffff;
+      --accent: #2f6f6a;
+      --accent-soft: #e4efed;
+      --line: #e3e0da;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--surface);
+      color: var(--ink);
+      font-family: "Apple SD Gothic Neo", "Malgun Gothic", -apple-system, system-ui, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      word-break: keep-all;
+      overflow-wrap: break-word;
+    }
+    a { color: var(--accent); }
+    a:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+    .wrap { max-width: 1040px; margin: 0 auto; padding: 0 24px; }
+    section { padding: 88px 0; }
+    h1, h2, h3 { line-height: 1.3; letter-spacing: -0.01em; }
+    h2 { font-size: 1.9rem; margin: 0 0 12px; }
+    .eyebrow { color: var(--accent); font-weight: 700; font-size: 0.9rem; margin: 0 0 8px; }
+    .lead { color: var(--muted); margin: 0 0 32px; }
+
+    /* 맨 위 메뉴 줄 */
+    .topbar { position: sticky; top: 0; z-index: 10; background: rgba(251,249,246,0.94);
+              backdrop-filter: blur(6px); border-bottom: 1px solid var(--line); }
+    .topbar .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .brand { font-weight: 800; font-size: 1.1rem; text-decoration: none; color: var(--ink); }
+    .menu { display: flex; gap: 6px; }
+    .menu a { text-decoration: none; color: var(--ink); padding: 10px 12px; min-height: 44px;
+              display: inline-flex; align-items: center; border-radius: 8px;
+              transition: background 200ms ease; }
+    .menu a:hover { background: var(--accent-soft); }
+
+    /* 첫 화면 */
+    .hero { padding: 104px 0 96px; background: linear-gradient(180deg, var(--surface), #f1f6f4); }
+    .hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); margin: 0 0 20px; }
+    .hero p { font-size: 1.1rem; color: var(--muted); max-width: 560px; margin: 0 0 32px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px;
+           padding: 12px 22px; border-radius: 10px; background: var(--accent); color: #fff;
+           text-decoration: none; font-weight: 700; cursor: pointer;
+           transition: transform 200ms ease, background 200ms ease; }
+    .btn:hover { background: #295f5b; transform: translateY(-1px); }
+    .btn.ghost { background: transparent; color: var(--accent); border: 2px solid var(--accent); }
+    .btn-row { display: flex; flex-wrap: wrap; gap: 12px; }
+
+    /* 소개 */
+    .intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+    .photo { width: 100%; aspect-ratio: 4 / 3; border-radius: 16px; background: #d9e3e0;
+             display: flex; align-items: center; justify-content: center; color: var(--muted);
+             font-size: 0.95rem; overflow: hidden; }
+    .photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .points { list-style: none; padding: 0; margin: 24px 0 0; display: grid; gap: 14px; }
+    .points li { display: flex; gap: 12px; align-items: flex-start; }
+    .points svg { flex: none; width: 22px; height: 22px; color: var(--accent); margin-top: 2px; }
+
+    /* 진료 안내 */
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 28px;
+            transition: transform 200ms ease, box-shadow 200ms ease; }
+    .card:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(31,42,46,0.08); }
+    .card .icon { width: 44px; height: 44px; border-radius: 12px; background: var(--accent-soft);
+                  display: flex; align-items: center; justify-content: center; color: var(--accent); margin-bottom: 16px; }
+    .card .icon svg { width: 24px; height: 24px; }
+    .card h3 { margin: 0 0 8px; font-size: 1.15rem; }
+    .card p { margin: 0; color: var(--muted); }
+
+    /* 오시는 길 */
+    .alt { background: #f1f6f4; }
+    .visit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+    .info-table { width: 100%; border-collapse: collapse; background: var(--card);
+                  border-radius: 14px; overflow: hidden; border: 1px solid var(--line); }
+    .info-table th, .info-table td { padding: 16px 18px; text-align: left; border-bottom: 1px solid var(--line); }
+    .info-table th { width: 110px; color: var(--muted); font-weight: 600; }
+    .info-table tr:last-child th, .info-table tr:last-child td { border-bottom: 0; }
+    .map-placeholder { margin-top: 20px; height: 220px; border-radius: 14px; background: #d9e3e0;
+                       display: flex; align-items: center; justify-content: center; color: var(--muted); }
+
+    /* 맨 아래 정보 */
+    footer { background: var(--ink); color: #dfe7e5; padding: 56px 0 40px; }
+    footer .cols { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 24px; }
+    footer strong { color: #fff; }
+    footer p { margin: 0 0 6px; font-size: 0.95rem; }
+    footer .copy { margin-top: 32px; font-size: 0.85rem; color: #9fb0ad; }
+
+    @media (max-width: 860px) {
+      .intro-grid, .visit-grid { grid-template-columns: 1fr; gap: 32px; }
+      .cards { grid-template-columns: 1fr; }
+      section { padding: 64px 0; }
+      .menu { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      * { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="wrap">
+      <a class="brand" href="#top">서울비전치과</a>
+      <nav class="menu" aria-label="주요 메뉴">
+        <a href="#about">병원 소개</a>
+        <a href="#treatment">진료 안내</a>
+        <a href="#visit">오시는 길</a>
+        <a href="#info">진료 정보</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- 첫 화면 -->
+    <section class="hero">
+      <div class="wrap">
+        <p class="eyebrow">서울비전치과 · 편안한 치과 진료</p>
+        <h1>오래 웃을 수 있도록,<br />차분하게 진료합니다</h1>
+        <p>아픈 곳을 정확히 살피고,<br />설명을 충분히 드린 뒤 치료를 시작합니다.<br />처음 오시는 분도 편하게 상담받으실 수 있어요.</p>
+        <div class="hero-info">
+          <!-- 여기고치기: 진료시간 -->
+          <p>평일 09:30~18:30 · 화요일 야간 20:00까지 · 토요일 09:30~14:00</p>
+          <!-- 여기고치기: 전화 -->
+          <p>전화 <a class="tel" data-phone>031-651-2877</a></p>
+          <p>경기도 평택시 용죽3로 18 4층 (용죽지구 투썸플레이스 건물 4층)</p>
+        </div>
+        <div class="btn-row">
+          <a class="btn" href="#visit">오시는 길 보기</a>
+          <a class="btn ghost" href="#info">진료시간 확인</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 병원 소개 -->
+    <section id="about">
+      <div class="wrap intro-grid">
+        <div class="photo" role="img" aria-label="병원 내부 사진 자리">
+          <!-- 사진 자리: 병원 외관 또는 내부 사진을 넣으면 됩니다 -->
+          병원 사진 자리
+        </div>
+        <div>
+          <p class="eyebrow">병원 소개</p>
+          <h2>서울비전치과를 소개합니다</h2>
+          <p class="lead">원장님과 직원이 함께 환자 한 분 한 분의 치아 상태를 살핍니다.</p>
+          <ul class="points">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              <span>진료 전에 상태와 치료 방법을 차근차근 설명드립니다.</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              <span>진료실과 대기실을 정돈해 편안하게 머무실 수 있도록 합니다.</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              <span>아이와 함께 오신 가족분도 편하게 상담받으실 수 있습니다.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 진료 안내 -->
+    <section id="treatment" class="alt">
+      <div class="wrap">
+        <p class="eyebrow">진료 안내</p>
+        <h2>이런 진료를 합니다</h2>
+        <p class="lead">필요한 치료만 정확하게, 설명을 먼저 드립니다.</p>
+        <div class="cards">
+          <article class="card">
+            <div class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5c-2-2-6-2-7 1-1 3 1 7 2 10 1 2 3 2 4 0l1-3 1 3c1 2 3 2 4 0 1-3 3-7 2-10-1-3-5-3-7-1Z"/></svg>
+            </div>
+            <h3>일반 진료</h3>
+            <p>충치 치료, 레진 치료, 잇몸 관리, 스케일링 등 기본 진료를 꼼꼼히 봅니다.</p>
+          </article>
+          <article class="card">
+            <div class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16M12 4v16"/></svg>
+            </div>
+            <h3>임플란트</h3>
+            <p>잃어버린 치아를 되찾도록 검사부터 치료 계획까지 함께 세웁니다.</p>
+          </article>
+          <article class="card">
+            <div class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/><path d="M9 12h6"/></svg>
+            </div>
+            <h3>심미보철</h3>
+            <p>치아 색과 모양을 자연스럽게 살리는 보철 치료를 상태에 맞춰 안내합니다.</p>
+          </article>
+          <article class="card">
+            <div class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 14c2-4 10-4 12 0"/><path d="M8 18h8"/></svg>
+            </div>
+            <h3>치주수술</h3>
+            <p>잇몸 상태를 정밀하게 살피고, 필요한 경우 치주 수술을 상태에 맞춰 안내합니다.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 오시는 길 -->
+    <section id="visit">
+      <div class="wrap visit-grid">
+        <div>
+          <p class="eyebrow">오시는 길</p>
+          <h2>찾아오시는 길</h2>
+          <p class="lead">주소를 참고해 편하게 찾아와 주세요.</p>
+          <div class="map">
+            <iframe
+              src="https://maps.google.com/maps?q=%EA%B2%BD%EA%B8%B0%EB%8F%84%20%ED%8F%89%ED%83%9D%EC%8B%9C%20%EC%9A%A9%EC%A3%BD3%EB%A1%9C%2018&output=embed"
+              title="서울비전치과 위치 지도"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              style="width:100%;height:220px;border:0;border-radius:14px;"></iframe>
+            <p class="map-address">경기도 평택시 용죽3로 18 4층 (용죽지구 투썸플레이스 건물 4층)</p>
+            <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=%EA%B2%BD%EA%B8%B0%EB%8F%84%20%ED%8F%89%ED%83%9D%EC%8B%9C%20%EC%9A%A9%EC%A3%BD3%EB%A1%9C%2018" target="_blank" rel="noopener">구글 지도에서 길찾기</a>
+            <a class="map-link" href="https://map.naver.com/v5/search/%EA%B2%BD%EA%B8%B0%EB%8F%84%20%ED%8F%89%ED%83%9D%EC%8B%9C%20%EC%9A%A9%EC%A3%BD3%EB%A1%9C%2018" target="_blank" rel="noopener">네이버 지도에서 길찾기</a>
+            <a class="map-link" href="https://map.kakao.com/?q=%EA%B2%BD%EA%B8%B0%EB%8F%84%20%ED%8F%89%ED%83%9D%EC%8B%9C%20%EC%9A%A9%EC%A3%BD3%EB%A1%9C%2018" target="_blank" rel="noopener">카카오맵에서 보기</a>
+          </div>
+        </div>
+        <div>
+          <table class="info-table">
+            <tr><th scope="row">주소</th><td>경기도 평택시 용죽3로 18 4층 (용죽지구 투썸플레이스 건물 4층)</td></tr>
+            <tr><th scope="row">주차</th><td>건물 주차장 이용 가능</td></tr>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 진료 정보 -->
+    <section id="info" class="alt">
+      <div class="wrap">
+        <p class="eyebrow">진료 정보</p>
+        <h2>진료시간 안내</h2>
+        <p class="lead">방문 전 전화로 확인하시면 더 정확합니다.</p>
+        <table class="info-table">
+          <!-- 여기고치기: 진료시간 -->
+          <tr><th scope="row">평일</th><td>09:30부터 18:30까지 (화요일은 20:00까지 야간진료)</td></tr>
+          <!-- 여기고치기: 점심시간 -->
+          <tr><th scope="row">점심시간</th><td>13:00부터 14:00까지 (토요일은 점심시간 없음)</td></tr>
+          <!-- 여기고치기: 진료시간 -->
+          <tr><th scope="row">토요일</th><td>09:30부터 14:00까지</td></tr>
+          <tr><th scope="row">일요일·공휴일</th><td>휴진</td></tr>
+          <!-- 여기고치기: 전화 -->
+          <tr><th scope="row">전화</th><td><a class="tel" data-phone>031-651-2877</a></td></tr>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <!-- 맨 아래 정보 -->
+  <footer>
+    <div class="wrap cols">
+      <div>
+        <p><strong>서울비전치과</strong></p>
+        <p>대표 원장 이우람</p>
+        <p>사업자등록번호 406-44-00556</p>
+      </div>
+      <div>
+        <p>주소 경기도 평택시 용죽3로 18 4층</p>
+        <p>전화 <a class="tel" data-phone style="color:#dfe7e5">031-651-2877</a></p>
+        <p><a href="https://naver.me/xAFXpdjG" target="_blank" rel="noopener" style="color:#dfe7e5">네이버 플레이스에서 보기</a></p>
+      </div>
+    </div>
+    <p class="wrap copy">© 서울비전치과. All rights reserved.</p>
+  </footer>
+
+  <!-- 화면의 전화번호만 고치면 누를 때 거는 번호도 같이 바뀝니다 -->
+  <script>document.querySelectorAll("a[data-phone]").forEach(a => a.href = "tel:" + a.textContent.replace(/[^0-9]/g, ""));</script>
+</body>
+</html>
